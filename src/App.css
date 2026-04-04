@@ -1,0 +1,448 @@
+/* ═══════════════════════════════════════════════════
+   BASE RESET
+═══════════════════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ═══════════════════════════════════════════════════
+   CTA BUTTON  (pill-shaped, reusable)
+═══════════════════════════════════════════════════ */
+.cta-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 11px 26px;
+  border-radius: 999px;          /* ← full pill */
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  letter-spacing: 0.01em;
+  transition: opacity 0.2s ease, transform 0.18s ease;
+  font-family: inherit;
+  white-space: nowrap;
+}
+.cta-btn:hover  { opacity: 0.82; transform: translateY(-1px); }
+.cta-btn:active { transform: translateY(0); }
+
+.cta-btn--dark  { background: #111; color: #fff; }
+.cta-btn--light { background: #f0f0f0; color: #111; }
+
+/* ═══════════════════════════════════════════════════
+   NAVBAR
+═══════════════════════════════════════════════════ */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  background: #fff;
+  border-bottom: 1px solid #ebebeb;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 52px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.logo-wrap { display: flex; align-items: center; flex-shrink: 0; }
+
+/* Desktop nav */
+.navbar__nav { flex: 1; display: flex; justify-content: center; }
+
+.navbar__links {
+  display: flex;
+  align-items: center;
+  gap: 36px;
+  list-style: none;
+}
+
+.nav-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  text-decoration: none;
+  font-size: 18px;          /* base 14 + 4px = 18px */
+  font-weight: 450;
+  color: #555;
+  transition: color 0.2s;
+}
+.nav-link:hover             { color: #111; }
+.nav-item--active .nav-link { color: #111; font-weight: 600; }
+
+.nav-chevron { margin-top: 1px; flex-shrink: 0; }
+
+.navbar__cta { flex-shrink: 0; }
+
+/* ─── Hamburger ──────────────────────────────────── */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  gap: 5px;
+  background: none;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  cursor: pointer;
+  padding: 6px;
+  flex-shrink: 0;
+}
+
+.hamburger__line {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: #111;
+  border-radius: 2px;
+  transition: transform 0.25s ease, opacity 0.2s ease;
+  transform-origin: center;
+}
+.hamburger__line--open-1 { transform: translateY(7px) rotate(45deg); }
+.hamburger__line--open-2 { opacity: 0; }
+.hamburger__line--open-3 { transform: translateY(-7px) rotate(-45deg); }
+
+/* ─── Mobile drawer ──────────────────────────────── */
+.mobile-menu {
+  width: 100%;
+  overflow: hidden;
+  border-top: 1px solid #eee;
+  padding: 16px 0 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+}
+
+.mobile-menu__links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.mobile-menu__links .nav-link {
+  padding: 12px 4px;
+  font-size: 18px;
+  width: 100%;
+  border-bottom: 1px solid #f2f2f2;
+}
+
+.mobile-menu__cta {
+  margin-top: 16px;
+  width: 100%;
+  justify-content: center;
+}
+
+/* ─── Responsive breakpoints ─────────────────────── */
+@media (max-width: 768px) {
+  .navbar { padding: 12px 20px; }
+  .navbar__nav  { display: none; }
+  .navbar__cta  { display: none; }
+  .hamburger    { display: flex; }
+}
+
+/* ═══════════════════════════════════════════════════
+   HERO SECTION
+═══════════════════════════════════════════════════ */
+.hero-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 80px 24px 100px;
+  text-align: center;
+}
+
+/* Badge */
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 18px;
+  border: 1px solid #d4d4d4;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: #333;
+  margin-bottom: 24px;
+}
+
+/* Title */
+.hero-title {
+  font-size: clamp(38px, 6vw, 62px);
+  font-weight: 400;
+  letter-spacing: -1.5px;
+  line-height: 1.08;
+  color: #111;
+  margin-bottom: 18px;
+}
+.hero-title em {
+  font-style: italic;
+  font-family: 'Georgia', 'Times New Roman', serif;
+}
+
+/* Subtitle */
+.hero-subtitle {
+  font-size: 15.5px;
+  color: #888;
+  max-width: 440px;
+  line-height: 1.65;
+  margin-bottom: 44px;
+}
+
+/* ═══════════════════════════════════════════════════
+   FORM CARD
+═══════════════════════════════════════════════════ */
+.form-card {
+  width: 100%;
+  max-width: 620px;
+  background: #f3f3f3;
+  border: 1px solid #e6e6e6;
+  border-radius: 20px;
+  padding: 36px 32px;
+}
+
+@media (max-width: 520px) {
+  .form-card { padding: 24px 16px; border-radius: 14px; }
+}
+
+/* ═══════════════════════════════════════════════════
+   CONTACT FORM
+═══════════════════════════════════════════════════ */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  text-align: left;
+}
+
+.contact-form__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+@media (max-width: 500px) {
+  .contact-form__row { grid-template-columns: 1fr; }
+}
+
+.contact-form__footer { display: flex; }
+
+/* ─── Input Group ────────────────────────────────── */
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.input-label {
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: #555;
+  text-transform: uppercase;
+}
+
+/* ─── Input Field (pill shape) ───────────────────── */
+.input-field {
+  width: 100%;
+  padding: 13px 20px;
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 999px;       /* ← full pill */
+  font-size: 14.5px;
+  color: #111;
+  outline: none;
+  font-family: inherit;
+  /* smooth transition covers both normal focus AND the warn fade-out */
+  transition: border-color 0.6s ease, box-shadow 0.6s ease, background 0.6s ease;
+}
+.input-field::placeholder { color: #bbb; }
+.input-field:focus {
+  border-color: #aaa;
+  box-shadow: 0 0 0 3px rgba(0,0,0,0.06);
+}
+
+/* Textarea overrides pill for practical UX */
+.input-field--textarea {
+  border-radius: 16px;
+  resize: vertical;
+  min-height: 150px;
+  padding: 14px 20px;
+  line-height: 1.65;
+}
+
+/* Submit button override */
+.submit-btn {
+  font-size: 18px !important;
+  padding: 13px 36px !important;
+}
+
+/* ─── Form status messages ───────────────────────── */
+.form-status {
+  font-size: 14px;
+  font-weight: 500;
+  padding: 12px 18px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.form-status--success {
+  background: #f0fdf4;
+  color: #166534;
+  border: 1px solid #bbf7d0;
+}
+
+.form-status--error {
+  background: #fff1f2;
+  color: #9f1239;
+  border: 1px solid #fecdd3;
+}
+
+.form-status--warning {
+  background: #fffbeb;
+  color: #92400e;
+  border: 1px solid #fde68a;
+}
+
+/* Yellow flash on invalid fields (auto-clears after 1s via JS) */
+.input-field--warn {
+  border-color: #f59e0b !important;
+  box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.18) !important;
+  background: #fffbeb !important;
+}
+
+/* ═══════════════════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════════════════ */
+.footer {
+  border-top: 1px solid #ebebeb;
+  overflow: hidden;
+}
+
+.footer__top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 56px 64px 48px;
+  gap: 48px;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+  .footer__top { padding: 40px 24px; flex-direction: column; }
+}
+
+/* Left column */
+.footer__left {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  min-width: 220px;
+  max-width: 300px;
+}
+
+.footer__logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.footer__brand {
+  font-size: 18px;
+  font-weight: 700;
+  color: #111;
+}
+
+.footer__nl-label {
+  font-size: 14px;
+  color: #444;
+  font-weight: 500;
+}
+
+/* Newsletter pill row */
+.footer__newsletter {
+  display: flex;
+  align-items: center;
+  background: #f4f4f4;
+  border: 1px solid #e0e0e0;
+  border-radius: 999px;
+  padding: 4px 4px 4px 18px;
+  gap: 6px;
+  max-width: 300px;
+}
+
+.footer__newsletter-input {
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 13.5px;
+  color: #333;
+  font-family: inherit;
+  flex: 1;
+  min-width: 0;
+}
+.footer__newsletter-input::placeholder { color: #bbb; }
+
+.footer__newsletter-btn {
+  font-size: 13px !important;
+  padding: 9px 16px !important;
+  flex-shrink: 0;
+}
+
+/* Right: link columns */
+.footer__columns {
+  display: flex;
+  gap: 44px;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 480px) {
+  .footer__columns { gap: 24px; }
+}
+
+.footer__col {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.footer__col-title {
+  font-size: 18px;        /* +4px: base ~14 → 18 */
+  font-weight: 700;
+  color: #111;
+}
+
+.footer__col-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer__link {
+  text-decoration: none;
+  font-size: 17px;        /* +4px: base ~13 → 17 */
+  color: #666;
+  transition: color 0.2s;
+}
+.footer__link:hover { color: #111; }
+
+/* Watermark */
+.footer__watermark {
+  padding: 0 52px;
+  font-size: clamp(72px, 18vw, 200px);
+  font-weight: 800;
+  font-family: 'Georgia', serif;
+  color: #111;
+  line-height: 0.82;
+  letter-spacing: -5px;
+  user-select: none;
+  overflow: hidden;
+}
+
+.footer__dot { margin-left: 0.12em; }
+
+@media (max-width: 480px) {
+  .footer__watermark { padding: 0 20px; }
+}

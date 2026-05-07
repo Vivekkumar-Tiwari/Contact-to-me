@@ -1,15 +1,11 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Logo from './Logo';
-import NavItem from './NavItem';
 import CTAButton from './CTAButton';
 
 const navLinks = [
-  { label: 'Home', href: '#' },
-  { label: 'About us', href: '#' },
-  { label: 'Pricing', href: '#' },
-  { label: 'Contact', href: '#', active: true },
-  { label: 'Pages', href: '#', hasDropdown: true },
+  { label: 'Home', page: 'home' },
+  { label: 'Contact', page: 'contact' },
 ];
 
 /* Navbar slides DOWN from above */
@@ -22,14 +18,19 @@ const navVariants = {
   },
 };
 
-const Navbar = () => {
+const Navbar = ({ currentPage, onNavigate }) => {
   const [menuOpen, setMenuOpen] = useState(false);
+
+  const handleNavClick = (page) => {
+    onNavigate(page);
+    setMenuOpen(false); // Close mobile menu after click
+  };
 
   return (
     <motion.header
       className="navbar"
       variants={navVariants}
-      /* inherits initial/animate from parent stagger */
+    /* inherits initial/animate from parent stagger */
     >
       <Logo />
 
@@ -37,7 +38,15 @@ const Navbar = () => {
       <nav className="navbar__nav" aria-label="Main navigation">
         <ul className="navbar__links">
           {navLinks.map((item) => (
-            <NavItem key={item.label} {...item} />
+            <li key={item.page} className={`nav-item ${currentPage === item.page ? 'nav-item--active' : ''}`}>
+              <button
+                onClick={() => handleNavClick(item.page)}
+                className="nav-link"
+                style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
+              >
+                {item.label}
+              </button>
+            </li>
           ))}
         </ul>
       </nav>
@@ -71,7 +80,15 @@ const Navbar = () => {
           >
             <ul className="mobile-menu__links">
               {navLinks.map((item) => (
-                <NavItem key={item.label} {...item} />
+                <li key={item.page} className={`nav-item ${currentPage === item.page ? 'nav-item--active' : ''}`}>
+                  <button
+                    onClick={() => handleNavClick(item.page)}
+                    className="nav-link"
+                    style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '12px 4px', fontSize: '18px', width: '100%', textAlign: 'left' }}
+                  >
+                    {item.label}
+                  </button>
+                </li>
               ))}
             </ul>
             <CTAButton label="Get Started" className="mobile-menu__cta" />

@@ -1,5 +1,7 @@
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import Navbar from './components/Navbar/Navbar';
+import Home from './components/Home';
 import HeroSection from './components/Contact/HeroSection';
 import Footer from './components/Footer/Footer';
 import './App.css';
@@ -29,15 +31,18 @@ export const sectionVariants = {
 };
 
 function App() {
+  const [currentPage, setCurrentPage] = useState('home'); // 'home' or 'contact'
+
   return (
     <motion.div
       variants={pageVariants}
       initial="hidden"
       animate="visible"
     >
-      <Navbar />
+      <Navbar currentPage={currentPage} onNavigate={setCurrentPage} />
       <main>
-        <HeroSection />
+        {currentPage === 'home' && <Home />}
+        {currentPage === 'contact' && <HeroSection />}
       </main>
       <Footer />
     </motion.div>
